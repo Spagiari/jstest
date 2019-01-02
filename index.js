@@ -1,7 +1,5 @@
 // Teste: código fonte disponível em http://github.com/Spagiari/jstest
 // Avalie as funções abaixo e responda as perguntas.
-// Critérios de avaliação: compreenção do código, compreenção do tema, 
-// dominio do tema e solução proposta se aplicavel.
 
 var a;
 function teste1() {
