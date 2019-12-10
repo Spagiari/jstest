@@ -12,13 +12,14 @@ console.log(a === 3);
  * ***********************************/
 
 function teste2() {
-    var something = false;
-    setTimeout(function() {
-        something = true;
-    }, 0);
-    console.log(something);
-}
-teste2();
+    var arr = [1, 2, 3];
+    for (var i = 0; i < arr.length; i++) {
+        setTimeout(function() {
+            console.log(`Index: ${i};\nElement: ${arr[i]}`);
+        }, 0);
+    }
+  }
+  teste2();
 /* ***********************************
  * (2) Qual o valor escrito no console e por quê?
  * ***********************************/
