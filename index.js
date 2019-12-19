@@ -1,6 +1,8 @@
 // Teste: código fonte disponível em http://github.com/Spagiari/jstest
 // Avalie as funções abaixo e responda as perguntas.
-
+// As perguntas avaliam pelo menos um tema importante da linguagem Javascript.
+// Será avaliado a compreenção do código, o conhecimento sobre o tema e 
+//   a argumentação sobre a questão e / ou possíveis soluções.
 var a;
 function teste1() {
     var a = 3;
