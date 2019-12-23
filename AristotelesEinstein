@@ -1,0 +1,170 @@
+//TESTE1
+
+var a;
+function teste1() {
+ var a = 3;
+}
+teste1();
+console.log(a === 3);
+
+/* ***********************************
+ * (1) Por que o valor falso é escrito no console?
+ É apresentado o valor falso no console pois na função teste1() é criada uma variavel a,
+  porem não é a mesma variavel usada no teste do console.log()
+ A variavel da function não é a mesma variavel que está fora, então a atribuição não vai
+  para a variavel do teste.
+ Então console esta testando se a com nada dentro é "identico" ao numero 3
+ Uma forma de solucionar o problema para apresentar o resultado "true" é retirar a palavra "var"
+ de dentro da função, pois ai sim a função irá alterar a variavel a criada fora.
+ * ***********************************/
+var a;
+function teste1() {
+  a = 3;
+}
+teste1();
+console.log(a === 3);
+
+
+//TESTE2
+function teste2() {
+    var arr = [1, 2, 3];
+        for (var i = 0; i < arr.length; i++) {
+        setTimeout(function() {console.log(`Index: ${i};\nElement: ${arr[i]}`);}, 0);
+        }
+ }
+ teste2();
+/* ***********************************
+ * (2) Qual o valor escrito no console e por quê?
+O valor escrito no console é:
+Index: 3;
+Element: undefined
+Index: 3;
+Element: undefined
+Index: 3;
+Element: undefined
+
+Pois basicamente mesmo que na função setTimeout() o argumento de tempo seja 0 ele está executando primeiro o loop "for"
+e mudando a variavel contador "i" depois ele executa o setTimeout()
+por isso todos os index no console são 3, pois ele executou o "for" primeiro e depois do ultimo contador a variavel "i" foi para 3
+e não encontrou nenhum elemento no array nessa posição pois o utlimo indice é o 2.
+
+Uma forma de resolver isso seria iniciar o contador "i" como "let" pois criaria uma nova ligação de variável para cada iteração do
+loop "for", portanto, em cada interação, uma nova variável com o valor atualizado está sendo criada na memória, isso faz com que
+o console escreva de forma correta todos os consoles com seus respectivos contadores
+
+Com essa solução o valor escrito no console será:
+Index: 0;
+Element: 1
+Index: 1;
+Element: 2
+Index: 2;
+Element: 3
+ * ***********************************/
+function teste2() {
+    var arr = [1, 2, 3];
+        for (let i = 0; i < arr.length; i++) {
+        setTimeout(function() {console.log(`Index: ${i};\nElement: ${arr[i]}`);}, 0);
+        }
+ }
+ teste2();
+
+//TESTE3
+function inc(i) {
+ i++;
+}
+function teste3() {
+ var i = 0;
+ inc(i);
+ console.log(i);
+}
+teste3();
+/* ***********************************
+ * (3) Quais os valores escritos no console e por quê?
+ É exibido o valor 0 no console, pois a função inc pega somente seu próprio valor de parametro
+  e adiciona 1 com o contador (++) apenas isso, não altera nada, não retorna nada.
+  Então quando ela é chamada dentro da fução teste3() ela apenas realiza essa ação, e não muda 
+  a variavel "i" que fou utilizada como parametro
+  Por fim como não há alteração da variavel "i" ela é mostrada 0, da forma como ela foi criada
+  Uma possivel solução seria fazer a função inc() retornar o resultado de "i", e atribuir o
+  resultado na variavel "i" que está dentro da função teste3 
+ * ***********************************/
+function inc(i) {
+    i++;
+    return i;
+   }
+   function teste3() {
+    var i = 0;
+     i = inc(i);
+    console.log(i);
+   }
+   teste3();
+
+//TESTE4
+function teste4() {
+    var value = 10;
+    return ( function () {
+    return value;
+    })
+   }
+   func = teste4();
+   console.log(func());
+   
+   /* ***********************************
+    * (4) Qual o valor escrito no console e por quê?
+    É mostrado  valor 10 no console pois a  função teste4() cria uma variavel chamada
+     value e atribui 10 depois a função retorna outra função "anonima" que retorna 
+     a variavel value.
+    Após isso a função teste4() é atribuida a variavel func().
+    E por fim é executado um console.log chamando a função que está dentro da variavel
+     func, com a utilização dos parenteses Em: func()
+    Basicamente o que será executado é a função teste4(), que dentro dela é retornado 
+     uma função que retorna a variavel value que possui o valor 10 e que essa função é chamada
+     pela variavel func com os parenteses
+    * ***********************************/
+
+//TESTE5
+// A função shuffle recebe como entrada uma array e a embaralha.
+function shuffle(a) {
+    // atribui a variável n a quantidades de elementos da array a.
+    n = a.length;
+    // Percorre a array a da posição 0 até a ultima posição.
+    for (var i = 0; i < n; i++) {
+    //Sorteia uma posição aleatória entre i e n−1 e atribui para a variável swap
+    swap = i + Math.floor(Math.random() * (n - i - 1));
+    // Troca os valores das posições i e swap da array a.
+    var aux = a[i];
+    a[i] = a[swap];
+    a[swap] = aux;
+    }
+   }
+   var array = [5, 3, 1, 4, 2];
+   if (shuffle(array)) console.log(array);
+   /*
+Em teoria a função exerce a operação pela qual foi criada, ela consegue mudar os dados que estão dentro do array, 
+ mas não de forma muito efetiva apesar da parte de troca de variaveis utilizando o aux ser muito boa, o calculo utilizado
+ para a criação da variavel swap não é muito eficaz 
+ esse calculo tem uma tendência a gerar o resultado 3, ou sempre vai gerar um resultado igual a cada vez que o for avança. 
+Isso pode resultar em um array com apenas umas variaveis trocadas e não o embaralhado que foi descrito no exercicio.
+Alguns pontos é que a variavel swap e a variavel n foram somente utilizadas, não iniciada nisso elas terão um escopo global, 
+sendo possivel usa-las fora da função, o ideal seria inciar ambas com o let, o mesmo se aplica a variavel aux, ela ja foi 
+iniciada com o var, mas o ideal seria com o let, pelo mesmo motivo
+Agora falando de fora da função do final, onde o if está praticamente impedindo o console.log de mostrar o resultado, uma 
+opção seria retornar true na função para entrar dentro do if e acessar o conosle.log 
+*/
+
+function shuffle(a) {
+    // atribui a variável n a quantidades de elementos da array a.
+    let n = a.length;
+    // Percorre a array a da posição 0 até a ultima posição.
+    for (var i = 0; i < n; i++) {
+    //Sorteia uma posição aleatória entre i e n−1 e atribui para a variável swap
+    let swap = i + Math.floor(Math.random() * (n - i - 1));
+    // Troca os valores das posições i e swap da array a.
+    let  aux = a[i];
+    a[i] = a[swap];
+    a[swap] = aux;
+    }
+    return true;
+   }
+   var array = [5, 3, 1, 4, 2];
+   if (shuffle(array)) console.log(array);
