@@ -90,17 +90,11 @@ const fs = require('fs');
 function doAllStuff(l1, b1, l2, b2) {
   const earthRadiusKm = 6371;
 
-  if (
-    l1 < -90 ||
-    l1 > 90 ||
-    l2 < -90 ||
-    l2 > 90 ||
-    b1 < -180 ||
-    b1 > 180 ||
-    b2 < -180 ||
-    b2 > 180
-  )
-    throw new RangeError('The argument must be between 0 and 360.');
+  if (l1 < -90 || l1 > 90 || l2 < -90 || l2 > 90)
+    throw new rangeerror('the arguments l1 and l2 must be between -90 and 90.');
+
+  if (b1 < -180 || b1 > 180 || b2 < -180 || b2 > 180)
+    throw new rangeerror('the arguments b1 and b2 must be between -180 and 180.');
 
   //convert coordenadas de graus para radianos
   const l1Radianus = (l1 * Math.PI) / 180;
