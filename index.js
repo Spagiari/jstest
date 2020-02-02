@@ -96,13 +96,13 @@ function doAllStuff(l1, b1, l2, b2) {
   if (b1 < -180 || b1 > 180 || b2 < -180 || b2 > 180)
     throw new rangeerror('the arguments b1 and b2 must be between -180 and 180.');
 
-  //convert coordenadas de graus para radianos
+  //converte coordenadas de graus para radianos
   const l1Radianus = (l1 * Math.PI) / 180;
   const b1Radianus = (b1 * Math.PI) / 180;
   const l2Radianus = (l2 * Math.PI) / 180;
   const b2Radianus = (b2 * Math.PI) / 180;
 
-  //calcula distância emtre os dois pontos
+  //calcula distância entre os dois pontos
   const lambda = Math.acos(
     Math.sin(l1Radianus) * Math.sin(l2Radianus) +
       Math.cos(l1Radianus) *
