@@ -73,7 +73,7 @@ if (shuffle(array)) console.log(array);
  * *********************************/
 /* *********************************
  * (6) A função baixo doAllStuff tem muitas responsabilidades.
- * Refatore o código e crie testes unitários e de integração. 
+ * Refatore o código e crie testes unitários e de integração.
  * Crie um projeto no github com a sua solução.
  * *********************************/
 const util = require('util');
@@ -91,14 +91,14 @@ function doAllStuff(l1, b1, l2, b2) {
   const earthRadiusKm = 6371;
 
   if (
-    l1 < 0 ||
-    l1 > 360 ||
-    b1 < 0 ||
-    b1 > 360 ||
-    l2 < 0 ||
-    l2 > 360 ||
-    b2 < 0 ||
-    b2 > 360
+    l1 < -90 ||
+    l1 > 90 ||
+    l2 < -90 ||
+    l2 > 90 ||
+    b1 < -180 ||
+    b1 > 180 ||
+    b2 < -180 ||
+    b2 > 180
   )
     throw new RangeError('The argument must be between 0 and 360.');
 
@@ -109,7 +109,7 @@ function doAllStuff(l1, b1, l2, b2) {
   const b2Radianus = (b2 * Math.PI) / 180;
 
   //calcula distância emtre os dois pontos
-  const lambda = Math.asin(
+  const lambda = Math.acos(
     Math.sin(l1Radianus) * Math.sin(l2Radianus) +
       Math.cos(l1Radianus) *
         Math.cos(l2Radianus) *
@@ -119,7 +119,7 @@ function doAllStuff(l1, b1, l2, b2) {
   const distanceBetweenTwoPoints = Math.sin(lambda) * earthRadiusKm;
 
   //salva informações no banco de dados
-  const appendFilePromisified = promisify(fs.appendFile);
+  const appendFilePromisified = util.promisify(fs.appendFile);
   return appendFilePromisified(
     'database.txt',
     `p1(${l1}, ${b1}) p2(${l2}, ${b2})\n`,
@@ -127,3 +127,8 @@ function doAllStuff(l1, b1, l2, b2) {
     return distanceBetweenTwoPoints;
   });
 }
+
+// Exemplo de uso. Distância entre as cidades de São Paulo e Rio de Janeiro
+doAllStuff(-23.618237, -46.635197, -22.9035, -43.2096).then(value =>
+  console.log(value),
+);
