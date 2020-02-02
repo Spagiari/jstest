@@ -116,7 +116,7 @@ function doAllStuff(l1, b1, l2, b2) {
   const appendFilePromisified = util.promisify(fs.appendFile);
   return appendFilePromisified(
     'database.txt',
-    `p1(${l1}, ${b1}) p2(${l2}, ${b2})\n`,
+    `p1(${l1}, ${b1}) p2(${l2}, ${b2}) d= ${distanceBetweenTwoPoints}KM\n`,
   ).then(() => {
     return distanceBetweenTwoPoints;
   });
