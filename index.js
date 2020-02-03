@@ -80,7 +80,7 @@ const util = require('util');
 const fs = require('fs');
 
 /**
- * doAllStuff - Calcula a distânsia entre dois pontos.
+ * doAllStuff - Calcula a distância entre dois pontos.
  * @param {number} l1 - latitude ponto 1.
  * @param {number} b1 - longitude ponto 1.
  * @param {number} l2 - latitude ponto 2.
